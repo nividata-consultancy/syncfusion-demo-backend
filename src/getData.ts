@@ -8,23 +8,23 @@ const sampleData: SampleDataModel = {
     metaData: {
         col1: {
             name: 'RowId',
-            dataType: 'number',
+            dataType: 'Num',
         },
         col2: {
             name: 'Name',
-            dataType: 'string',
+            dataType: 'Text',
         },
         col3: {
             name: 'Age',
-            dataType: 'number',
+            dataType: 'Num',
         },
         col4: {
             name: 'exField1',
-            dataType: 'number',
+            dataType: 'Num',
         },
         col5: {
             name: 'exField2',
-            dataType: 'number',
+            dataType: 'Num',
         }
     },
 };
@@ -92,13 +92,14 @@ const editColumn = (formData, socket) => {
     // let specificColumn = isForAdd ? 'col' + Object.keys(sampleData.metaData).length + 1 : selectedColumn;
 
     const updatedSampleData = {
-        data: [],
+        data: sampleData.data,
         metaData: sampleData.metaData,
     }
     if (updatedSampleData.metaData[selectedColumn].dataType != dataType) {
         updatedSampleData.data = getModifiedData(sampleData, selectedColumn, dataType, defaultValue);
     }
     updatedSampleData.metaData[selectedColumn].name = colName;
+    updatedSampleData.metaData[selectedColumn].dataType = dataType;
 
     writeToJsonFile(updatedSampleData);
 
